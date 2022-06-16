@@ -1,3 +1,4 @@
+
 import type { FunctionComponent } from 'react';
 
 import { styled } from '@linaria/react';
@@ -8,6 +9,10 @@ import { LoaderBlock } from 'components/common/LoaderBlock';
 import { useSortedTokens } from 'components/pages/home/TokensWidget/TokenAccountList/hooks/useSortedTokens';
 
 import { TokenAccountRow } from './TokenAccountRow';
+
+// import { Connection, PublicKey } from "@solana/web3.js";
+// import { deprecated } from "@metaplex-foundation/mpl-token-metadata";
+
 
 const Wrapper = styled.div`
   display: grid;
@@ -26,11 +31,6 @@ type Props = {
 
 export const TokenAccountList: FunctionComponent<Props> = ({ items = [], isHidden = false }) => {
   const tokenAccounts = useSortedTokens(items);
-
-  if (tokenAccounts.length === 0 && !isHidden) {
-    return <LoaderBlock />;
-  }
-
   return (
     <Wrapper>
       {tokenAccounts.map(

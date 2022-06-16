@@ -20,11 +20,15 @@ import { useConfig } from 'app/contexts/solana/swap';
 import { AmountUSD } from 'components/common/AmountUSD';
 import { COLUMN_RIGHT_WIDTH } from 'components/common/Layout/constants';
 import { ToastManager } from 'components/common/ToastManager';
+import { NFTAvatar } from 'components/common/NFTAvatar';
 import { TokenAvatar } from 'components/common/TokenAvatar';
 import { Widget } from 'components/common/Widget';
 import { Button, Icon } from 'components/ui';
 import { formatNumberToUSD } from 'utils/format';
 import { shortAddress } from 'utils/tokens';
+
+import { Connection, PublicKey } from "@solana/web3.js";
+import { deprecated } from "@metaplex-foundation/mpl-token-metadata";
 
 import { Chart } from './Chart';
 
@@ -180,7 +184,9 @@ type Props = {
   publicKey: string;
 };
 
+let count = 0;
 const TopWidgetOrigin: FunctionComponent<Props> = ({ publicKey }) => {
+
   const location = useLocation();
   const { tokenConfigs } = useConfig();
   const widgetRef = useRef<HTMLDivElement>(null);
@@ -196,6 +202,39 @@ const TopWidgetOrigin: FunctionComponent<Props> = ({ publicKey }) => {
     ? candles[tokenAccount.balance.token.symbol]
     : null;
   const isMainnet = network === 'mainnet-beta';
+
+  let name: String = tokenAccount?.balance?.token.name as string;
+  let symbol: String = tokenAccount?.balance?.token.symbol as string;
+  let description: String = tokenAccount?.balance?.token.address.toString() as string;
+  let img: String = ""
+  let band: boolean = false;
+  const [NFTName, setNFTName] = useState(name);
+  const [NFTSymbol, setSymbol] = useState(symbol);
+  const [NFTDescription, setNFTDescription] = useState(description);
+  const [NFTImage, setNFTImage] = useState(img);
+  const [IsNFT, setIsNFT] = useState(band);
+
+  if (tokenAccount?.balance && tokenAccount.balance.numerator.toString() == "1") {
+    if (count < 1 && tokenAccount?.balance) {
+      count = count + 1;
+      isNFT(tokenAccount?.balance?.token.address as string).then(result => {
+        setNFTName(result.data?.data.name.toString() as string);
+        setSymbol(result.data?.data.symbol.toString() as string);
+        setIsNFT(true);
+        console.log(result.data?.data.symbol.toString() as String, count)
+        let url = result.data?.data.uri;
+        fetch(url as string)
+          .then(res => res.json())
+          .then(out => {
+            console.log('Checkout this JSON! ', out.image)
+            setNFTImage(out.image)
+            setNFTDescription(out.description);
+          }).catch(err => { });
+      });
+    } else {
+      console.log("NO entra")
+    }
+  }
 
   useEffect(() => {
     const loadCandles = async () => {
@@ -348,7 +387,6 @@ const TopWidgetOrigin: FunctionComponent<Props> = ({ publicKey }) => {
       </PriceWrapped>
     );
   };
-
   return (
     <>
       <Widget
@@ -356,15 +394,16 @@ const TopWidgetOrigin: FunctionComponent<Props> = ({ publicKey }) => {
         title={
           tokenAccount?.key && tokenAccount?.balance ? (
             <Header>
-              <TokenAvatar
+              <NFTAvatar
                 symbol={tokenAccount.balance?.token.symbol}
                 address={tokenAccount.balance?.token?.address}
                 size={44}
+                imageURL={NFTImage as string}
               />
               <TokenInfo>
-                <TokenSymbol>{tokenAccount.balance?.token.symbol}</TokenSymbol>
-                <TokenName title={tokenAccount.key.toBase58()}>
-                  {tokenAccount.balance?.token.name || shortAddress(tokenAccount.key.toBase58())}
+                <TokenSymbol>{NFTName}</TokenSymbol>
+                <TokenName title={NFTDescription as string}>
+                  {NFTDescription}
                 </TokenName>
               </TokenInfo>
               {tokenAccount.balance?.token?.mintAccount.equals(SYSTEM_PROGRAM_ID) ? undefined : (
@@ -394,18 +433,36 @@ const TopWidgetOrigin: FunctionComponent<Props> = ({ publicKey }) => {
       {isShowFixed ? (
         <WrapperFixed>
           <FixedInfoWrapper>
-            <TokenAvatar
+            <NFTAvatar
               symbol={tokenAccount?.balance?.token.symbol}
               address={tokenAccount?.balance?.token.address}
               size={36}
+              imageURL={NFTImage as string}
             />
             {renderContent(true)}
           </FixedInfoWrapper>
           {renderButtons()}
         </WrapperFixed>
       ) : null}
+      {
+        IsNFT ? (
+          <div>
+            <img src={NFTImage as string} height={200}></img>
+            <h4>Name: {NFTName}</h4>
+            <h4>Description: {NFTDescription}</h4>
+          </div>
+        ) : null
+      }
     </>
   );
 };
 
 export const TopWidget = memo(TopWidgetOrigin);
+
+const isNFT = async (key: string): Promise<deprecated.Metadata> => {
+  const connection = new Connection("https://api.mainnet-beta.solana.com");
+  let mintPubkey = new PublicKey(key as string);
+  let tokenmetaPubkey = await deprecated.Metadata.getPDA(mintPubkey);
+  const tokenmeta = await deprecated.Metadata.load(connection, tokenmetaPubkey);
+  return tokenmeta;
+}

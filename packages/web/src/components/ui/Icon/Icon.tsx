@@ -67,6 +67,7 @@ import successSend from './assets/success-send-icon.svg';
 import sun from './assets/sun-icon.svg';
 import timer from './assets/timer-icon.svg';
 import walletOld from './assets/wallet-icon.svg';
+import nft from './assets/nft-icon.svg';
 
 const iconsMap = new Map<string, string>([
   ['arrow', arrow],
@@ -133,6 +134,7 @@ const iconsMap = new Map<string, string>([
   ['success-send', successSend],
   ['error-send', errorSend],
   ['rocket', rocket],
+  ['nft', nft]
 ]);
 
 export interface IconProps extends HTMLAttributes<HTMLOrSVGElement> {

@@ -42,7 +42,8 @@ export const TransactionDetails: FC = () => {
         <AccordionTitle
           title="Transaction details"
           titleBottomName={titleBottomNameEl(isAddressNotMatchNetwork)}
-          titleBottomValue={titleBottomValueEl(isAddressNotMatchNetwork, details.totalAmount || '')}
+          // eslint-disable-next-line prettier/prettier
+          titleBottomValue={titleBottomValueEl(isAddressNotMatchNetwork, details.receiveAmount + " + 0.000005 SOL"|| '')}
         />
       }
       open
@@ -60,9 +61,9 @@ export const TransactionDetails: FC = () => {
           <Text className="gray">Transaction fee</Text>
           {useFreeTransactions ? (
             <Text>
-              Free{' '}
+              Sol{' '}
               <Text className="green inline-flex">
-                (Paid by P2P.org) <FeeTransactionTooltip userFreeFeeLimits={userFreeFeeLimits} />
+                (0.000005) <FeeTransactionTooltip userFreeFeeLimits={userFreeFeeLimits} />
               </Text>
             </Text>
           ) : (
@@ -90,7 +91,7 @@ export const TransactionDetails: FC = () => {
         <Row>
           <Text>Total</Text>
           <Text>
-            {details.totalAmount}
+            {details.receiveAmount} + 0.000005 SOL
             {/* <Text className="gray">(~$150.5)</Text> */}
           </Text>
         </Row>

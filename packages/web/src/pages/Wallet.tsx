@@ -18,6 +18,7 @@ export const WalletOrigin: FunctionComponent = () => {
 
   const publicKey = usePubkey(_publicKey) as PublicKey;
   const tokenAccount = useTokenAccount(publicKey);
+  console.log("ajioajio")
 
   return (
     <Layout

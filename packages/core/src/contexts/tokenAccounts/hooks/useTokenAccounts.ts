@@ -12,6 +12,9 @@ import { useWallet } from '@saberhq/use-solana';
 import { useTokens } from '../../tokens';
 import { TokenAmount } from '@p2p-wallet-web/token-utils';
 
+// import { Connection, PublicKey} from "@solana/web3.js";
+// import { deprecated } from "@metaplex-foundation/mpl-token-metadata";
+
 export const useTokenAccounts = (
   publicKeys: (PublicKey | null | undefined)[] = [],
 ): (TokenAccount | undefined)[] => {
@@ -19,6 +22,7 @@ export const useTokenAccounts = (
   const tokenAccountsData = useAccountsData(publicKeys);
 
   const mints = useMemo(() => {
+    console.log("sdad")
     return tokenAccountsData.map((datum, i) => {
       if (!datum) {
         // Use wallet Native SOL if its zero
@@ -53,9 +57,10 @@ export const useTokenAccounts = (
           loading: false,
           balance: undefined,
           isInitialized: !!datum,
+          isNFT: false,
         };
       }
-
+      
       const token = tokens[i];
       if (!token) {
         return {
@@ -63,6 +68,7 @@ export const useTokenAccounts = (
           loading: token === undefined,
           balance: undefined,
           isInitialized: !!datum,
+          isNFT: false,
         };
       }
 
@@ -73,9 +79,9 @@ export const useTokenAccounts = (
           loading: false,
           balance: new TokenAmount(token, datum.accountInfo.lamports),
           isInitialized: true,
+          isNFT: false,
         };
       }
-
       const parsed = datum ? TOKEN_ACCOUNT_PARSER(datum) : datum;
       try {
         return {
@@ -83,11 +89,26 @@ export const useTokenAccounts = (
           loading: datum === undefined,
           balance: parsed ? new TokenAmount(token, parsed.amount) : new TokenAmount(token, 0),
           isInitialized: !!datum,
+          isNFT: false,
         };
       } catch (e) {
         console.warn(`Error parsing ATA ${datum?.accountId.toString() ?? '(unknown)'}`, e);
         return undefined;
       }
     });
+    
   }, [publicKeys, tokenAccountsData, tokens]);
 };
+
+// const isNFT = async(key: string): Promise<boolean> =>{
+//   let bool = false;
+//   const connection = new Connection("https://api.mainnet-beta.solana.com");
+//   let mintPubkey = new PublicKey(key as string);
+//   let tokenmetaPubkey = await deprecated.Metadata.getPDA(mintPubkey);
+//   await deprecated.Metadata.load(connection, tokenmetaPubkey).then(tokenmeta => {
+//     bool = true;
+//   }).catch(error => {
+//     // console.log("catch" + key);
+//   });
+//   return bool;
+// }

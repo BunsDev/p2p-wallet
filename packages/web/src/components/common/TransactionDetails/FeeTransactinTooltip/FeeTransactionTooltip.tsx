@@ -14,21 +14,22 @@ interface Props {
   userFreeFeeLimits: typeof INITIAL_USER_FREE_FEE_LIMITS;
 }
 
-export const FeeTransactionTooltip: FC<Props> = ({ userFreeFeeLimits }) => {
-  const currentTransactionCount = userFreeFeeLimits.currentTransactionCount;
-  const maxTransactionCount = userFreeFeeLimits.maxTransactionCount;
-  const availableTransactionsCount = userFreeFeeLimits.hasFreeTransactions
-    ? maxTransactionCount - currentTransactionCount
-    : 0;
+export const FeeTransactionTooltip: FC<Props> = () => {
+  // const currentTransactionCount = userFreeFeeLimits.currentTransactionCount;
+  // const maxTransactionCount = userFreeFeeLimits.maxTransactionCount;
+  // const availableTransactionsCount = userFreeFeeLimits.hasFreeTransactions
+  //   ? maxTransactionCount - currentTransactionCount
+  //   : 0;
 
   const elTooltip = (
     <TooltipContent>
-      <span>
+      {/* <span>
         On the Solana network, the first {maxTransactionCount} transactions in a day are paid by
         P2P.org. You have {availableTransactionsCount} free transactions left for today
       </span>
       <br />
-      <br /> Subsequent transactions will be charged based on the Solana blockchain gas fee.
+      <br />  */}
+      transactions will be charged based on the Solana blockchain gas fee.
     </TooltipContent>
   );
 

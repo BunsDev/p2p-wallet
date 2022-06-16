@@ -39,9 +39,6 @@ export const ReceiveWidget: FC = () => {
     <WidgetPage title="Receive" icon="bottom">
       <Content>
         <NetworkSelect />{' '}
-        {sourceNetwork === 'solana' ? (
-          <WhatCanReceiveLink to="/receive/tokens">What tokens can I receive?</WhatCanReceiveLink>
-        ) : undefined}
       </Content>
 
       {renderSourceNetworkReceivePanel()}

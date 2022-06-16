@@ -163,7 +163,7 @@ export const LeftNavMenu: FunctionComponent = () => {
         </NavButton>
       </NavLinkMenu>
 
-      <Feature name={FEATURE_NAV_MENU_BUY_BUTTON}>
+      {/* <Feature name={FEATURE_NAV_MENU_BUY_BUTTON}>
         <NavLinkMenu
           to={{ pathname: '/buy', state: { fromPage: location.pathname } }}
           className="button"
@@ -175,7 +175,7 @@ export const LeftNavMenu: FunctionComponent = () => {
             <Name>Buy</Name>
           </NavButton>
         </NavLinkMenu>
-      </Feature>
+      </Feature> */}
 
       <NavLinkMenu
         to={{ pathname: '/receive', state: { fromPage: location.pathname } }}
@@ -199,7 +199,7 @@ export const LeftNavMenu: FunctionComponent = () => {
           <Name>Send</Name>
         </NavButton>
       </NavLinkMenu>
-      <NavLinkMenu
+      {/* <NavLinkMenu
         to={{ pathname: '/swap', state: { fromPage: location.pathname } }}
         className="button"
       >
@@ -209,7 +209,19 @@ export const LeftNavMenu: FunctionComponent = () => {
           </IconBlock>
           <Name>Swap</Name>
         </NavButton>
+      </NavLinkMenu> */}
+      <NavLinkMenu
+        to={{ pathname: '/nfts', state: { fromPage: location.pathname } }}
+        className="button"
+      >
+        <NavButton>
+          <IconBlock>
+            <NavIcon name="nft" />
+          </IconBlock>
+          <Name>NFTs</Name>
+        </NavButton>
       </NavLinkMenu>
+
       <NavLinkMenu
         to={{ pathname: '/settings', state: { fromPage: location.pathname } }}
         className="button"
@@ -224,7 +236,7 @@ export const LeftNavMenu: FunctionComponent = () => {
       <Separator>
         <Line />
       </Separator>
-      <NavLinkMenu
+      {/* <NavLinkMenu
         to={{ pathname: appStorePath }}
         as={Link}
         target="_blank"
@@ -253,7 +265,7 @@ export const LeftNavMenu: FunctionComponent = () => {
           <Name>Google Play</Name>
           <StoreIcon name="store-icon" />
         </NavButton>
-      </NavLinkMenu>
+      </NavLinkMenu> */}
     </Wrapper>
   );
 };

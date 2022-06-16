@@ -1,0 +1,1 @@
+export { NFTAvatar } from './NFTAvatar';

@@ -1,0 +1,30 @@
+import { Connection, PublicKey } from "@solana/web3.js";
+import { deprecated,  } from "@metaplex-foundation/mpl-token-metadata";
+
+export const getNFT = async (key: string): Promise<boolean> => {
+    let bool = false;
+    const connection = new Connection("https://api.mainnet-beta.solana.com");
+    let mintPubkey = new PublicKey(key as string);
+    let tokenmetaPubkey = await deprecated.Metadata.getPDA(mintPubkey);
+    await deprecated.Metadata.load(connection, tokenmetaPubkey).then(tokenmeta => {
+        bool = true;
+        console.log("SI")
+    }).catch(error => {
+        console.log("NO");
+    });
+    return bool;
+}
+
+export const isNFT = async (key: string): Promise<boolean> => {
+    let bool = false;
+    const connection = new Connection("https://api.mainnet-beta.solana.com");
+    let mintPubkey = new PublicKey(key as string);
+    let tokenmetaPubkey = await deprecated.Metadata.getPDA(mintPubkey);
+    await deprecated.Metadata.load(connection, tokenmetaPubkey).then(tokenmeta => {
+        bool = true;
+        console.log("SI")
+    }).catch(error => {
+        console.log("NO");
+    });
+    return bool;
+}

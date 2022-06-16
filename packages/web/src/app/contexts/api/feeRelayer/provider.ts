@@ -129,7 +129,8 @@ const useFeeRelayerInternal = (): FeeRelayerService => {
         throw new Error('Wallet not ready');
       }
 
-      const feePayer = await getFeePayerPubkey(feeRelayerURL);
+      // const feePayer = await getFeePayerPubkey(feeRelayerURL);
+      const feePayer = wallet.publicKey;
       const isNeedCompensation = nextTransactionCompensation?.feeAmount.gt(ZERO);
       const isPayInSol =
         isNeedCompensation && nextTransactionCompensation?.feeToken?.balance?.token.isRawSOL;
@@ -188,10 +189,15 @@ const useFeeRelayerInternal = (): FeeRelayerService => {
       return INITIAL_USER_FREE_FEE_LIMITS;
     }
 
-    const result = await getFreeFeeLimits(feeRelayerURL, wallet.publicKey);
+    // const result = await getFreeFeeLimits(feeRelayerURL, wallet.publicKey);
 
-    const currentTransactionCount = result.processed_fee.count;
-    const maxTransactionCount = result.limits.max_count;
+    // const Fee result = await getFreeFeeLimits(feeRelayerURL, wallet.publicKey);
+
+    // const currentTransactionCount = result.processed_fee.count;
+    // const maxTransactionCount = result.limits.max_count;
+
+    const currentTransactionCount = 0;
+    const maxTransactionCount = 0;
 
     return {
       currentTransactionCount,
@@ -206,7 +212,8 @@ const useFeeRelayerInternal = (): FeeRelayerService => {
         throw new Error('Wallet not ready');
       }
 
-      const feePayer = await getFeePayerPubkey(feeRelayerURL);
+      // const feePayer = await getFeePayerPubkey(feeRelayerURL);
+      const feePayer = wallet.publicKey;
 
       const instructions: TransactionInstruction[] = [];
 

@@ -64,9 +64,9 @@ export const TransactionDetails: FC<TransactionDetailsProps> = ({
           <Text className="gray">Transaction fee</Text>
           {useFreeTransactions ? (
             <Text>
-              Free{' '}
+              {' '}
               <Text className="green inline-flex">
-                (Paid by P2P.org)
+                (0.000005)
                 {userFreeFeeLimits && (
                   <FeeTransactionTooltip userFreeFeeLimits={userFreeFeeLimits} />
                 )}

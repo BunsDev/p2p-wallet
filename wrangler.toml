@@ -16,4 +16,4 @@ entry-point = "workers-site"
 [env.production]
 name = "p2p-wallet"
 vars = { ENVIRONMENT = "production" }
-route = "wallet.p2p.org/*"
+route = "wallet.p2p.org/"

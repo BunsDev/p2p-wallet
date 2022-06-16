@@ -5,7 +5,7 @@ import { styled } from '@linaria/react';
 import { useWallet } from '@p2p-wallet-web/core';
 import { zIndexes } from '@p2p-wallet-web/ui';
 
-import logo from 'assets/images/logo.png';
+import logo from 'assets/images/bcare.jpg';
 import { COLUMN_LEFT_WIDTH, COLUMNS_GRID_GUTTER } from 'components/common/Layout';
 import { Icon } from 'components/ui';
 
@@ -62,7 +62,7 @@ const LogoLink = styled(Link)`
 
 const LogoImg = styled.img`
   width: 108px;
-  height: 38px;
+  height: 108px;
 `;
 
 const BreadcrumbWrapper = styled.div`

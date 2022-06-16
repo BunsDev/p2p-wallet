@@ -9,6 +9,7 @@ import { useTokenAccountsHidden } from 'app/contexts/general/settings';
 import { Icon } from 'components/ui';
 
 import { TokenAccountList } from './TokenAccountList';
+import type { TokenAccount } from '@p2p-wallet-web/core';
 
 const Wrapper = styled.div`
   display: grid;
@@ -72,7 +73,17 @@ export const TokensWidget: FunctionComponent<Props & HTMLAttributes<HTMLDivEleme
   className,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [tokenAccounts, hiddenTokenAccounts] = useTokenAccountsHidden();
+  // let arreglo1: TokenAccount[] =[];
+  // let arreglo2: TokenAccount[] =[];
+  // const [tokenAccounts, setTokenAccounts] = useState(arreglo1);
+  // const [hiddenTokenAccounts, setHiddenTokenAccounts] = useState(arreglo2);
+  // useTokenAccountsHidden().then(result => {
+  //   setTokenAccounts(result[0]);
+  //   setHiddenTokenAccounts(result[1])
+  // });
+
+
+  const[tokenAccounts, hiddenTokenAccounts, NFTS] = useTokenAccountsHidden();
 
   const handleChevronClick = () => {
     setIsOpen(!isOpen);

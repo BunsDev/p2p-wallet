@@ -21,6 +21,7 @@ import { Swap } from 'pages/Swap';
 import { Wallet } from 'pages/Wallet';
 import { WalletSettings } from 'pages/WalletSettings';
 import { AuthRequiredRoute } from 'utils/routes/UserRequiredRoute';
+import { Nfts } from 'pages/Nfts';
 
 import { Providers } from './Providers';
 
@@ -44,6 +45,7 @@ const App: React.FC = () => {
             {/*<AuthRequiredRoute path="/swap/:publicKey?" component={SwapNew} />*/}
             <AuthRequiredRoute path="/settings/network" component={SettingsNetwork} />
             <AuthRequiredRoute path="/settings" component={Settings} />
+            <AuthRequiredRoute path="/nfts" component={Nfts} />
             <AuthRequiredRoute path="/buy/:symbol?" component={Buy} />
           </Switch>
           <Intercom />

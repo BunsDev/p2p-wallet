@@ -118,7 +118,7 @@ export const NetworkSelect: FC = () => {
   };
 
   const title = 'Showing my address for';
-  const avatarSize = getAvatarSize(isMobile);
+  // const avatarSize = getAvatarSize(isMobile);
 
   return (
     <Select
@@ -139,7 +139,7 @@ export const NetworkSelect: FC = () => {
         </>
       }
     >
-      {RECEIVE_SOURCE_NETWORKS.map((network) => (
+      {/* {RECEIVE_SOURCE_NETWORKS.map((network) => (
         <SelectItem
           key={network}
           isSelected={network === sourceNetwork}
@@ -148,7 +148,7 @@ export const NetworkSelect: FC = () => {
           <TokenAvatar symbol={SYMBOLS[network]} size={avatarSize} />
           <Network>{network} network</Network>
         </SelectItem>
-      ))}
+      ))} */}
     </Select>
   );
 };

@@ -111,7 +111,6 @@ interface Props {
 
 export const TokenAccountRowContent: FC<Props> = ({ tokenAccount, isMobilePopupChild }) => {
   const isMobile = useIsMobile();
-
   if (!tokenAccount) {
     return null;
   }

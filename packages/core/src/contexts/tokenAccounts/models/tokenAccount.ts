@@ -9,4 +9,5 @@ export interface TokenAccount {
   loading: boolean;
   balance?: TokenAmount;
   isInitialized?: boolean;
+  isNFT?: boolean;
 }

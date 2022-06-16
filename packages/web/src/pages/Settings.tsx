@@ -200,7 +200,7 @@ export const Settings: FunctionComponent = () => {
               </Item>
             </Feature>
             <AccordionItem>
-              <Accordion
+              {/* <Accordion
                 open={(location.state as any)?.isUsernameActive}
                 title={
                   <AccordionTitle>
@@ -250,7 +250,7 @@ export const Settings: FunctionComponent = () => {
                     </MobileButtons>
                   </>
                 )}
-              </Accordion>
+              </Accordion> */}
             </AccordionItem>
             <Item>
               <ItemTitle>Network</ItemTitle>
