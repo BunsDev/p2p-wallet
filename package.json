@@ -33,7 +33,7 @@
     "*.{js,json,jsx,html,css,md}": "prettier --write"
   },
   "engines": {
-    "node": ">= 10.x"
+    "node": ">= 16.x"
   },
   "dependencies": {
     "@metaplex-foundation/mpl-token-metadata": "~2.0"
